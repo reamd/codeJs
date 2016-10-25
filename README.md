@@ -1,11 +1,11 @@
 # 原生验证码组件code.js
 ## 组件使用demo
-1. 首先需要在body元素末尾引入code.js这个组件库，如下
+#### 1. 首先需要在body元素末尾引入code.js这个组件库，如下
 ```js
 <script src="code.js"></script>
 ```
 
-2. html代码如下：
+#### 2. html代码如下：
 ```js
 <form>
     <br/>
@@ -17,7 +17,7 @@
 </form>
 ```
 
-3. 实例化调用：
+#### 3. 实例化调用：
 ```js
 var cd = new code('#codeContainer',{                    //需要绑定的元素，符合xpath语法
         on: true,                                          //是否显示验证码组件，默认为false
@@ -31,7 +31,7 @@ var cd = new code('#codeContainer',{                    //需要绑定的元素�
 ```
 *注：changeCallback，focusCallback，blurCallback，refreshCallback四个参数默认内置，除非有特殊需求的时候重写这四个方法，否则省略这四个参数即可。*
 
-4. 表现效果
+#### 4. 表现效果
  **输入正确**
 	![正确输入效果](https://github.com/reamd/material/blob/master/codeJs/correct.gif)
     
@@ -39,7 +39,7 @@ var cd = new code('#codeContainer',{                    //需要绑定的元素�
 	![错误输入效果](https://github.com/reamd/material/blob/master/codeJs/error.gif)  
     
 ## 组件代码解析
-1. 组件库代码头部采用了UMD规范，兼容前端AMD规范，后端CommonJS规范，原生js全局变量。
+#### 1. 组件库代码头部采用了UMD规范，兼容前端AMD规范，后端CommonJS规范，原生js全局变量。
 相关代码如下：
 ```js
 (function (root, factory) {
@@ -61,7 +61,7 @@ var cd = new code('#codeContainer',{                    //需要绑定的元素�
 }));
 ```
 
-2. 组件库构造函数的数据结构如下：
+#### 2. 组件库构造函数的数据结构如下：
 ```js
 	this.on = opt.on || false; //是否开启验证码
     this.codeUrl = opt.codeUrl; //验证码请求地址
@@ -76,7 +76,7 @@ var cd = new code('#codeContainer',{                    //需要绑定的元素�
     }; //验证码显示方法
 ```
 
-3. 预置功能函数和默认内置事件
+#### 3. 预置功能函数和默认内置事件
  - 预置功能方法有
 	- html模板拼接方法
 ```js
@@ -145,6 +145,6 @@ function _ajax(opt){//opt{url: ,method: ,data:{}, success: function(){}, error: 
 	- 验证码刷新事件
 *注：由于篇幅有限，故不一一展示代码，感兴趣者可自行参考code.js的相关函数，`_changeCallback`,`_focusCallback`,`_blurCallback`,`_refreshCallback`。*
 
-4. 模板组装和事件绑定
+#### 4. 模板组装和事件绑定
  - 模板组装中使用了image base64图片编码技术进行显示提示相关图片
  - 当模板渲染完毕后，进行事件调用以进行上述默认内置事件的绑定
