@@ -4,6 +4,7 @@
 ```js
 <script src="code.js"></script>
 ```
+
 2. html代码如下：
 ```js
 <form>
@@ -15,6 +16,7 @@
     <input type="button" name="login" value="登录" style="width: 80px;height:30px;line-height: 30px;"/>
 </form>
 ```
+
 3. 实例化调用：
 ```js
 var cd = new code('#codeContainer',{                    //需要绑定的元素，符合xpath语法
@@ -28,6 +30,7 @@ var cd = new code('#codeContainer',{                    //需要绑定的元素�
     });
 ```
 *注：changeCallback，focusCallback，blurCallback，refreshCallback四个参数默认内置，除非有特殊需求的时候重写这四个方法，否则省略这四个参数即可。*
+
 4. 表现效果
  **输入正确**
 	![正确输入效果](https://github.com/reamd/material/blob/master/codeJs/correct.gif)
