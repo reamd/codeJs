@@ -1,0 +1,26 @@
+{
+  "name": "code.js",
+  "version": "1.0.0",
+  "description": "原生验证码组件",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reamd/codeJs.git"
+  },
+  "keywords": [
+    "验证码"
+  ],
+  "author": "reamd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reamd/codeJs/issues"
+  },
+  "homepage": "https://github.com/reamd/codeJs#readme",
+  "devDependencies": {
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2"
+  }
+}

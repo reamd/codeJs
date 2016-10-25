@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>验证码组件示例</title>
+</head>
+<body>
+<style>
+    * {padding:0; margin:0;}
+</style>
+<form>
+    <br/>
+    登录名:<input type="text" name="username"/><br/><br/>
+    密&nbsp;码:<input type="password" name="pwd"/>
+    <div id="codeContainer"></div>
+    <br>
+    <input type="button" name="login" value="登录" style="width: 80px;height:30px;line-height: 30px;"/>
+</form>
+<script src="code.js"></script>
+<script>
+    var cd = new code('#codeContainer',{
+        on: true,                                          //是否显示验证码组件，默认为false
+        codeUrl: 'http://localhost:8080/login/getCode',    //验证码请求地址
+        validUrl: ['http://localhost:8080/login/validCode','verifyCode','POST','flag']  //[用户输入验证码验证地址，验证码上传到服务器提交的接口参数名，ajax提交方式，验证成功的判断字段]
+    });
+</script>
+</body>
+</html>
