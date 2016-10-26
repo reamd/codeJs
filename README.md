@@ -74,6 +74,24 @@ var cd = new code('#codeContainer',{                    //需要绑定的元素�
 	this.show = function(){
         _$(ele).setAttribute("style","display:block;");
     }; //验证码显示方法
+    this.check = function(cb){
+            cb = cb || alert;
+            switch(me.status){
+                case null:
+                    cb('请输入验证码！');
+                    return;
+                case 'correct':
+                    return true;
+                case 'less':
+                case 'beyond':
+                case 'error':
+                    cb('验证码输入错误！');
+                    return;
+                default:
+                    cb('验证码出错！');
+                    return;
+            }
+        };//检查验证码是否正确
 ```
 
 #### 3. 预置功能函数和默认内置事件
