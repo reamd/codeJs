@@ -18,9 +18,13 @@
         root.code = factory;
     }
 }(typeof window !== "undefined" ? window : this, function (ele,opt) {
+    var me = this,
+        _$ = function(selector){
+            return document.querySelector(selector);
+        };
     //构造函数的数据结构
     this.on = opt.on || false; //是否开启验证码插件
-    this.status = opt.on?null:'correct';        //验证码输入状态null(未输入),less(小于)，beyond(超出),error(输入的不正确),correct(输入正确)
+    this.status = opt.on?null:'correct';
     this.codeUrl = opt.codeUrl; //验证码请求地址
     this.validUrl = opt.validUrl; //验证码验证地址
 
@@ -29,11 +33,12 @@
     this.blurCallback = opt.blurCallback || _blurCallback; //输入框失去焦点事件
     this.refreshCallback = opt.refreshCallback || _refreshCallback; //验证码刷新事件
 
-    var me = this,
-        _$ = function(selector){
-            return document.querySelector(selector);
-        };
     this.show = function(){
+        if(me.on){
+            return;
+        }else {
+            me.on = true;
+        }
         if(me.status === 'correct'){
             me.status = null;
         }
@@ -41,14 +46,26 @@
     };
     this.check = function(cb){
         cb = cb || alert;
+        //检测验证码输入框的状态
+        if(me.on){
+            var len = _$(ele + ' #code').value.length,
+                attr =  _$(ele + ' .input-tip').getAttribute('class');
+            if(len === 0){
+                me.status = null;
+            }else if(attr.indexOf('correct') > -1){
+                me.status = 'correct';
+            }else if(attr.indexOf('error') > -1){
+                me.status = 'error';
+            }else {
+                me.status = 'other';
+            }
+        }
         switch(me.status){
             case null:
                 cb('请输入验证码！');
                 return;
             case 'correct':
                 return true;
-            case 'less':
-            case 'beyond':
             case 'error':
                 cb('验证码输入错误！');
                 return;
@@ -56,6 +73,11 @@
                 cb('验证码出错！');
                 return;
         }
+    };
+    this.refresh = function(){
+        _$(ele + ' .input-tip').setAttribute('class','input-tip');
+        _$(ele + ' #code').value = "";
+        _$(ele + ' .refreshCode img').setAttribute('src', me.codeUrl + '?' + new Date().getTime());
     };
 
     //预置功能函数
@@ -142,22 +164,15 @@
             if(len === 4){
                 _reqValid(this.value, function(err, data){
                     if(err){
-                        me.status = "error";
                         _$(ele + ' .input-tip').setAttribute('class','input-tip error');
                         _$(ele + ' #code').value = "";
                         _$(ele + ' .text').click();
                     }else {
-                        me.status = "correct";
                         _$(ele + ' .input-tip').setAttribute('class','input-tip correct');
                     }
                 });
             }else if(len > 4){
-                me.status = "beyond";
                 _$(ele + ' .input-tip').setAttribute('class','input-tip error');
-            }else if(len === 0){
-                me.status = null;
-            }else {
-                me.status = "less";
             }
         });
     }

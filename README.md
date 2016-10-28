@@ -64,6 +64,7 @@ var cd = new code('#codeContainer',{                    //需要绑定的元素�
 #### 2. 组件库构造函数的数据结构如下：
 ```js
 	this.on = opt.on || false; //是否开启验证码
+	this.status = opt.on?null:'correct';//验证码状态
     this.codeUrl = opt.codeUrl; //验证码请求地址
     this.validUrl = opt.validUrl; //验证码验证地址
 
@@ -92,6 +93,11 @@ var cd = new code('#codeContainer',{                    //需要绑定的元素�
                     return;
             }
         };//检查验证码是否正确
+    this.refresh = function(){
+            _$(ele + ' .input-tip').setAttribute('class','input-tip');
+            _$(ele + ' #code').value = "";
+            _$(ele + ' .refreshCode img').setAttribute('src', me.codeUrl + '?' + new Date().getTime());
+        };//刷新验证码方法
 ```
 
 #### 3. 预置功能函数和默认内置事件
