@@ -194,10 +194,12 @@
     }
     function _refreshCallback(){
         _$(ele + ' .refreshCode').addEventListener('click', function(){
-            _$(ele + ' .refreshCode img').setAttribute('src', me.codeUrl + '?' + new Date().getTime());
+            me.refresh();
+            _$(ele + ' #code').focus();
         });
         _$(ele + ' .text').addEventListener('click', function(){
-            _$(ele + ' .refreshCode img').setAttribute('src', me.codeUrl + '?' + new Date().getTime());
+            me.refresh();
+            _$(ele + ' #code').focus();
         });
     }
 
